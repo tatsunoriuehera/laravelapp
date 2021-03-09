@@ -23,10 +23,14 @@ Route::get('hello',function(){
 });
 */
 Route::get('/', function () {
-    return view('hello.index');
+    return view('welcome');
 });
 
+//Route::get('hello','HelloController@index');
+
 Route::get('hello','HelloController@index');
+Route::post('hello','HelloController@post');
+
 Route::get('hello/other','HelloController@other');
 
 //シングルアクションコントローラ

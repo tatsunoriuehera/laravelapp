@@ -1,0 +1,16 @@
+<html>
+<head>
+  <titie>@yield('title')</titie>
+</head>
+<body>
+  <h1>@yield('title')</h1>
+  @section('menuber')
+  <ul>
+    <p>memu</p>
+    <li>@show</li>
+  </ul>
+  <hr>
+  @yield('content')
+  @yield('footer')
+</body>
+</html>

@@ -23,8 +23,16 @@ class HelloController extends Controller
     */
 
     public function index(){
-      //$data = ['msg'=>'this is controller send message'];
-      return view('hello.index');
+      $data = ['msg'=>''];
+      $list = ['one','two','three'];
+      return view('hello.index',$data,['list'=>$list]);
+    }
+
+    public function post(Request $request){
+      $msg= $request->msg;
+      $data = ['msg'=>'hello : '.$msg];
+      $list = ['one','two','three'];
+      return view('hello.index',$data,['list'=>$list]);
     }
 
     public function other(){
