@@ -25,7 +25,8 @@ class HelloController extends Controller
     public function index(){
       $data = ['msg'=>''];
       $list = ['one','two','three'];
-      return view('hello.index',$data,['list'=>$list]);
+      $address = [['name'=>'taro','mail'=>'taro@mail'],['name'=>'hanako','mail'=>'hanako@mail']];
+      return view('hello.index',$data,['list'=>$list],['address'=>$address]);
     }
 
     public function post(Request $request){
