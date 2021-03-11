@@ -56,7 +56,7 @@
   @include('components.message',['msg_title'=>'OK','msg_content'=>'this is sub view'])
 
 {{-- from item.blade.php --}}
-  @each('components.item',$address,$item)
+  @each('components.item',$address,'item')
 @endsection
 
 @section('footer')

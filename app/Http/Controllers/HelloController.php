@@ -26,7 +26,8 @@ class HelloController extends Controller
       $data = ['msg'=>''];
       $list = ['one','two','three'];
       $address = [['name'=>'taro','mail'=>'taro@mail'],['name'=>'hanako','mail'=>'hanako@mail']];
-      return view('hello.index',$data,['list'=>$list],['address'=>$address]);
+      //変数を複数渡すにはcompactを使う
+      return view('hello.index',compact('data','address','list'));
     }
 
     public function post(Request $request){
