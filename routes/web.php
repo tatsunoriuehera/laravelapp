@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Middleware\HelloMiddleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,9 +28,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//Route::get('hello','HelloController@index');
+//helloにアクセスした際には、hellomiddlewaregroupに登録してあるすべてのmiddlewareが呼び出される
+Route::get('hello','HelloController@index')->middleware('hello');
+//use Middleware
+//Route::get('hello','HelloController@index')->middleware(HelloMiddleware::class);
+//use middleware add kernel.php(global middleware)
 
-Route::get('hello','HelloController@index');
+
 Route::post('hello','HelloController@post');
 
 Route::get('hello/other','HelloController@other');

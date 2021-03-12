@@ -55,8 +55,13 @@
 
   @include('components.message',['msg_title'=>'OK','msg_content'=>'this is sub view'])
 
-{{-- from item.blade.php --}}
+  {{-- from item.blade.php --}}
   @each('components.item',$address,'item')
+
+  {{-- provider --}}
+  <p>controller value:'message'={{$message}}</p>
+  <p>viewcomposer value:'view_message'={{$view_message}}</p>
+
 @endsection
 
 @section('footer')

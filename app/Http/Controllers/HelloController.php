@@ -22,13 +22,29 @@ class HelloController extends Controller
     }
     */
 
+//use hello(blade)php
+/*
     public function index(){
       $data = ['msg'=>''];
       $list = ['one','two','three'];
       $address = [['name'=>'taro','mail'=>'taro@mail'],['name'=>'hanako','mail'=>'hanako@mail']];
+      $message = 'hello';
+
       //変数を複数渡すにはcompactを使う
-      return view('hello.index',compact('data','address','list'));
+      return view('hello.index',compact('data','address','list','message'));
     }
+*/
+
+//use Middleware
+public function index(Request $request){
+
+  //before middleware
+  //return view('hellomiddle.index',['data'=>$request->data]);
+
+  //after middleware
+  return view('hellomiddle.index');
+}
+
 
     public function post(Request $request){
       $msg= $request->msg;
