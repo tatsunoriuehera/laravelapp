@@ -29,13 +29,14 @@ Route::get('/', function () {
 });
 
 //helloにアクセスした際には、hellomiddlewaregroupに登録してあるすべてのmiddlewareが呼び出される
-Route::get('hello','HelloController@index')->middleware('hello');
+//Route::get('hello','HelloController@index')->middleware('hello');
 //use Middleware
 //Route::get('hello','HelloController@index')->middleware(HelloMiddleware::class);
 //use middleware add kernel.php(global middleware)
 
 
 Route::post('hello','HelloController@post');
+Route::get('hello','HelloController@index');
 
 Route::get('hello/other','HelloController@other');
 

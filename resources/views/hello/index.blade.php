@@ -13,20 +13,14 @@
   <p>please input name</p>
   @endif
 
-  <form method="POST" action="/laravelapp/public/hello">
-  {{--<form method="POST" action="/hello">--}}
-    {{-- csr対策 --}}
-    {{ csrf_field() }}
-    <input type="text" name="msg" autofocus>
-    <input type="submit">
-  </form>
+
 <hr>
 
 <p>ディレクティブ</p>
 <ol>
-  @foreach($list as $item)
-<li>{{$item}}
-  @endforeach
+{{--  @foreach($list as $item) --}}
+<li>{{-- {{$item}}--}}
+  {{--  @endforeach --}}
 </ol>
 
 </body>
@@ -56,12 +50,33 @@
   @include('components.message',['msg_title'=>'OK','msg_content'=>'this is sub view'])
 
   {{-- from item.blade.php --}}
-  @each('components.item',$address,'item')
+  {{--  @each('components.item',$address,'item')
 
   {{-- provider --}}
-  <p>controller value:'message'={{$message}}</p>
-  <p>viewcomposer value:'view_message'={{$view_message}}</p>
+  <p>{{--  controller value:'message'={{$message}} --}}</p>
+  <p>{{--  viewcomposer value:'view_message'={{$view_message}} --}}</p>
 
+  {{-- バリデーション --}}
+  <p>{{$msg}}</p>
+
+  <form method="POST" action="/laravelapp/public/hello">
+  {{--<form method="POST" action="/hello">--}}
+    {{-- csr対策 --}}
+    {{ csrf_field() }}
+    @if($errors->has('name'))
+    {{$errors->first('name')}}
+    @endif
+    <input type="text" name="name" value="{{old('name')}}">
+    @if($errors->has('mail'))
+    {{$errors->first('mail')}}
+    @endif
+    <input type="text" name="mail" value="{{old('mail')}}">
+    @if($errors->has('age'))
+    {{$errors->first('age')}}
+    @endif
+    <input type="text" name="age" value="{{old('age')}}">
+    <input type="submit" value="send">
+  </form>
 @endsection
 
 @section('footer')

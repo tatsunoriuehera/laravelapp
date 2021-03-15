@@ -5,6 +5,11 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
+//use original validator
+//use Illuminate\Validation\Validator;
+use Validator;
+use App\Http\Validators\HelloValidator;
+
 class HelloServiceProvider extends ServiceProvider
 {
     /**
@@ -30,6 +35,19 @@ class HelloServiceProvider extends ServiceProvider
         //});
 
         //composerの呼び出し
-        View::composer('hello.index','App\Http\Composers\HelloComposer');
+        //  View::composer('hello.index','App\Http\Composers\HelloComposer');
+
+        /*
+        $validator=$this->app['validator'];
+        //resolver（バリデーションの処理を行う）
+        $validator->resolver(function($translator,$data,$rules,$messages){
+          return new HelloValidator($translator,$data,$rules,$messages);
+        });
+        */
+
+        Validator::extend('hello',function($attribute,$value,$parameters,$validator){
+          return $value % 2 == 0;
+        });
+
     }
 }
