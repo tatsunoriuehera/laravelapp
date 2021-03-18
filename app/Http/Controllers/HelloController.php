@@ -11,6 +11,9 @@ use App\Http\Requests\HelloRequest;
 //バリデータ
 use Validator;
 
+//conn database
+use Illuminate\Support\Facades\DB;
+
 
 class HelloController extends Controller
 {
@@ -59,15 +62,27 @@ public function index(Request $request){
     $msg='query exception';
   }else{
   */
-    $msg='ID PASS OK: please input form';
-
   //}
-
+  //  $msg='ID PASS OK: please input form';
+  /*
+  if($request->hasCookie('msg')){
+    $msg= 'Cookie:'.$request->cookie('msg');
+  }else{
+    $msg='no cookie';
+  }
   return view('hello.index',['msg'=>$msg,]);
+  */
+  if(isset($request->id)){
+    $param=['id'=>$request->id];
+    $items=DB::select('select * from people where id = :id',$param);
+  }else{
+    $items=DB::select('select * from people');
+  }
+  return view('hello.index',['items'=>$items]);
 }
 
 
-    public function post(HelloRequest $request){
+    public function post(Request $request){
       //$validate_rule=[
         //'name'=>'required',
         //'mail'=>'email',
@@ -106,25 +121,35 @@ public function index(Request $request){
       ->withInput();
     }
     */
-    return view('hello.index',['msg'=>'mission complete']);
+
+    //$msg = '';
+    //return view('hello.index',['msg'=>'mission complete']);
+
+    $validate_rule=['msg'=>'required',];
+    $this->validate($request,$validate_rule);
+    $msg = $request->msg;
+    $response=new Response(view('hello.index',['msg'=>$msg]));
+    $response->cookie('msg',$msg,100);
+    return $response;
   }
 
     public function other(){
       $str = <<<EOD
-これはotherです。
-EOD;
+      これはotherです。
+      EOD;
 
-// 変数を出力
-echo $str;
+      // 変数を出力
+      echo $str;
     }
+
     public function __invoke(){
       $str = <<<EOD
-これはinvokeです。<br>
-シングルアクションコントローラ
-EOD;
+      これはinvokeです。<br>
+      シングルアクションコントローラ
+      EOD;
 
-// 変数を出力
-echo $str;
+      // 変数を出力
+      echo $str;
     }
 
 /*
@@ -139,4 +164,19 @@ EOD;
       return $response;
     }
 */
+
+  public function add(Request $request){
+    return view('hello.add')
+  }
+
+  public function create(Request $request){
+    $param=[
+    'name'=>$request->name,
+    'mail'=>$request->mail,
+    'age'=>$request->age,
+    ];
+    DB::insert('insert into people (name,mail,age) values (:name,:mail,:age)' $param);
+    return redirect('/hello');
+  }
+
 }

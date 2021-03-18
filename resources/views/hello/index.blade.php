@@ -57,7 +57,7 @@
   <p>{{--  viewcomposer value:'view_message'={{$view_message}} --}}</p>
 
   {{-- バリデーション --}}
-  <p>{{$msg}}</p>
+  <p>{{-- {{$msg}} --}}</p>
 
   <form method="POST" action="/laravelapp/public/hello">
   {{--<form method="POST" action="/hello">--}}
@@ -77,6 +77,25 @@
     <input type="text" name="age" value="{{old('age')}}">
     <input type="submit" value="send">
   </form>
+
+  {{-- {{$msg}} --}}
+  @if(count($errors)>0)
+  <p>caution</p>
+  @endif
+  <form method="POST" action="/laravelapp/public/hello">
+    {{ csrf_field() }}
+    @if($errors->has('msg'))
+    <p>error</p>{{$errors->first('msg')}}
+    @endif
+    message:<input type="text" name="msg" value="{{old('msg')}}" />
+    <input type="submit" value="send" />
+  </form>
+
+    <table>
+    @foreach($items as $item)
+    <tr><td>{{$item->name}}</td><td>{{$item->mail}}</td><td>{{$item->age}}</td>
+    @endforeach
+  </table>
 @endsection
 
 @section('footer')
