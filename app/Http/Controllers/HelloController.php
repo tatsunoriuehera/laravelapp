@@ -133,7 +133,11 @@ public function index(Request $request){
     $response->cookie('msg',$msg,100);
     return $response;
     */
-    $items=DB::select('select * from people');
+
+    //SQL
+    //$items=DB::select('select * from people');
+    //query builder
+    $items=DB::table('people')->get();
     return view('hello.index',['items'=>$items]);
   }
 /*
@@ -213,6 +217,36 @@ public function index(Request $request){
     $param=['id'=>$request->id];
     DB::delete('delete from people where id=:id',$param);
     return redirect('/hello');
+  }
+
+  public function show(Request $request){
+    /*
+    $id=$request->id;
+    $items=DB::table('people')-> where('id','<=',$id)->get();
+    */
+    /*
+    $name=$request->name;
+    $items=DB::table('people')
+    -> where('name','like','%'.$name.'%')
+    -> orwhere('mail','like','%'.$name.'%')->get();
+    */
+    /*
+    $min=$request->min;
+    $max=$request->max;
+    $items=DB::table('people')
+    -> whereRaw('age>=? and age<=?',[$min,$max])->get();
+    */
+    /*
+    $items=DB::table('people')-> orderBy('age','desc')->get();
+    */
+    $page=$request->page;
+    $items=DB::table('people')
+    ->offset($page * 3)
+    ->limit(2)
+    ->get();
+    return view('hello.show',['items'=>$items]);
+
+
   }
 
 }
