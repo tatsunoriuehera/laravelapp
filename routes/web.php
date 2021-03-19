@@ -38,6 +38,19 @@ Route::get('/', function () {
 Route::post('hello','HelloController@post');
 Route::get('hello','HelloController@index');
 
+//insert
+Route::get('hello/add','HelloController@add');
+Route::post('hello/add','HelloController@create');
+
+//update
+Route::get('hello/edit','HelloController@edit');
+Route::post('hello/edit','HelloController@update');
+
+//delete
+Route::get('hello/del','HelloController@del');
+Route::post('hello/del','HelloController@remove');
+
+
 Route::get('hello/other','HelloController@other');
 
 //シングルアクションコントローラ
