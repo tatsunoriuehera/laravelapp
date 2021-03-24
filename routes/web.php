@@ -55,5 +55,10 @@ Route::get('hello/show','HelloController@show');
 
 Route::get('hello/other','HelloController@other');
 
+//add person
+Route::get('person','PersonController@index');
+Route::get('person/find','PersonController@find');
+Route::post('person/find','PersonController@search');
+
 //シングルアクションコントローラ
 //Route::get('hello','HelloController');
