@@ -17,9 +17,37 @@
 </tr>
 @endforeach
 --}}
-@foreach($items as $item)
-  <tr><td>{{$item->getData()}}</td></tr>
+
+@foreach($hasItems as $item)
+  <tr><td>{{$item->getData()}}</td>
+      <td>
+
+        {{--
+        @if($item->boards!=null)
+
+            {{$item->board->getData()}}
+        --}}
+
+        <table with="100%">
+        @foreach($item->boards as $obj)
+        <tr><td>{{$obj->getData()}}</td></tr>
+        @endforeach
+        </table>
+        {{--@endif--}}
+      </td>
+  </tr>
 @endforeach
+</table>
+
+<table>
+  <tr>
+    <th>person</th>
+  </tr>
+  @foreach($noItems as $item)
+  <tr>
+    <td>{{$item->getData()}}</td>
+  </tr>
+  @endforeach
 </table>
 @endsection
 

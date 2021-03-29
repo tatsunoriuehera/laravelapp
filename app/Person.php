@@ -28,7 +28,7 @@ class Person extends Model
     protected static function boot(){
       parent::boot();
       static::addGlobalScope('age',function (Builder $builder){
-        $builder->where('age','>',40);
+        $builder->where('age','>',5);
       });
     }
 
@@ -42,4 +42,12 @@ class Person extends Model
     //https://toriyaru.com/2019/09/26/laravel%E3%81%AE%E3%83%A2%E3%83%87%E3%83%AB%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%82%A4%E3%83%B3%E3%82%B5%E3%83%BC%E3%83%88%E3%81%A7sqlstatehy000%E3%81%8C%E7%99%BA%E7%94%9F/
     public $timestamps = false;
 
+    // (model_relaion)
+    public function boards(){
+      /*hasOne
+      return $this->hasOne('App\Board');
+      */
+      /*hasMany*/
+      return $this->hasMany('App\Board');
+    }
 }

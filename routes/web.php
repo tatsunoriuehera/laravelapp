@@ -66,6 +66,14 @@ Route::post('person/edit','PersonController@update');
 Route::get('person/del','PersonController@delete');
 Route::post('person/del','PersonController@remove');
 
+//add Board_add
+Route::get('board','BoardController@index');
+Route::get('board/add','BoardController@add');
+Route::post('board/add','BoardController@create');
+
+//resource Controller
+//CRUD put together
+Route::resource('rest','RestappController');
 
 //シングルアクションコントローラ
 //Route::get('hello','HelloController');
