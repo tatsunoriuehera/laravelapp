@@ -75,5 +75,12 @@ Route::post('board/add','BoardController@create');
 //CRUD put together
 Route::resource('rest','RestappController');
 
+//restful
+Route::get('hello/rest','HelloController@rest');
+
+//
+Route::get('hello/session','HelloController@ses_get');
+Route::post('hello/session','HelloController@ses_put');
+
 //シングルアクションコントローラ
 //Route::get('hello','HelloController');

@@ -14,6 +14,8 @@ use Validator;
 //conn database
 use Illuminate\Support\Facades\DB;
 
+use App\Person;
+
 
 class HelloController extends Controller
 {
@@ -267,8 +269,23 @@ public function index(Request $request){
     ->limit(2)
     ->get();
     return view('hello.show',['items'=>$items]);
+  }
 
+  //restful
+  public function rest(Request $request){
+    return view('hello.rest');
+  }
 
+  //session
+  public function ses_get(Request $request){
+    $sesdata=$request->session()->get('msg');
+    return view('hello.session',['session_data'=>$sesdata]);
+  }
+
+  public function ses_put(Request $request){
+    $msg=$request->input;
+    $request->session()->put('msg',$msg);
+    return redirect('hello/session');
   }
 
 }
