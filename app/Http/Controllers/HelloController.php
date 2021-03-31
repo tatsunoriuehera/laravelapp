@@ -74,13 +74,25 @@ public function index(Request $request){
   }
   return view('hello.index',['msg'=>$msg,]);
   */
+  /*
   if(isset($request->id)){
     $param=['id'=>$request->id];
     $items=DB::select('select * from people where id = :id',$param);
   }else{
     $items=DB::select('select * from people');
   }
+  */
+
+  //page nation
+  /*
+  $items=DB::table('people')->simplePaginate(5);
   return view('hello.index',['items'=>$items]);
+  */
+  //sort
+  $sort=$request->sort;
+  $items=Person::orderBy($sort,'asc')->paginate(5);
+  $param=['items'=>$items,'sort'=>$sort];
+  return view('hello.index',$param);
 }
 
 

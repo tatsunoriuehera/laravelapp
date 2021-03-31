@@ -96,6 +96,38 @@
     <tr><td>{{$item->id}}</td><td>{{$item->name}}</td><td>{{$item->mail}}</td><td>{{$item->age}}</td>
     @endforeach
   </table>
+
+<hr>
+
+<h3>page nation</h3>
+  <table>
+    @foreach($items as $item)
+    <tr>
+      <td>{{$item->name}}{{$item->mail}}{{$item->age}}</td>
+    </tr>
+    @endforeach
+  </table>
+  {{$items->links()}}
+  
+<hr>
+
+<h3>sort</h3>
+<table>
+  <tr>
+    <th><a href="/laravelapp/public/hello?sort=name">name</a></th>
+    <th><a href="/laravelapp/public/hello?sort=mail">mail</a></th>
+    <th><a href="/laravelapp/public/hello?sort=age">age</a></th>
+  </tr>
+  @foreach($items as $item)
+  <tr>
+  <td>{{$item->name}}</td>
+  <td>{{$item->mail}}</td>
+  <td>{{$item->age}}</td>
+  </tr>
+  @endforeach
+</table>
+{{$items->appends(['sort'=>$sort])->links()}}
+
 @endsection
 
 @section('footer')

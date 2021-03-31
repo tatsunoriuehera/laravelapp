@@ -2,6 +2,10 @@
 <head>
   <titie>@yield('title')</titie>
   <link href="{{asset('css/style.css')}}" rel="stylesheet">
+  <link href="{{asset('css/app.css')}}" rel="stylesheet">
+  <style media="screen">
+    .pagination li{display: inline-block;}
+  </style>
 </head>
 <body>
   <h1>@yield('title')</h1>
