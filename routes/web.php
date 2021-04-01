@@ -36,7 +36,9 @@ Route::get('/', function () {
 
 
 Route::post('hello','HelloController@post');
-Route::get('hello','HelloController@index');
+//Route::get('hello','HelloController@index');
+//with Auth
+Route::get('hello','HelloController@index')->middleware('auth');
 
 //insert
 Route::get('hello/add','HelloController@add');
@@ -78,9 +80,17 @@ Route::resource('rest','RestappController');
 //restful
 Route::get('hello/rest','HelloController@rest');
 
-//
+//session
 Route::get('hello/session','HelloController@ses_get');
 Route::post('hello/session','HelloController@ses_put');
 
+//Auth
+Route::get('hello/auth','HelloController@getAuth');
+Route::post('hello/auth','HelloController@postAuth');
+
 //シングルアクションコントローラ
 //Route::get('hello','HelloController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

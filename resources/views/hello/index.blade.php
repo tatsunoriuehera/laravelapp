@@ -108,7 +108,7 @@
     @endforeach
   </table>
   {{$items->links()}}
-  
+
 <hr>
 
 <h3>sort</h3>
@@ -127,6 +127,13 @@
   @endforeach
 </table>
 {{$items->appends(['sort'=>$sort])->links()}}
+<hr>
+<h3>Auth</h3>
+@if(Auth::check())
+<p>user:{{$user->name.':'.$user->email}}</p>
+@else
+<p>not login!(<a href="/login">login</a> | <a href="/regster">登録</a></p>
+@endif
 
 @endsection
 

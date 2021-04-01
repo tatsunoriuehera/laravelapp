@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\DB;
 
 use App\Person;
 
+//add auth
+use Illuminate\Support\Facades\Auth;
+
 
 class HelloController extends Controller
 {
@@ -89,9 +92,17 @@ public function index(Request $request){
   return view('hello.index',['items'=>$items]);
   */
   //sort
+  /*
   $sort=$request->sort;
   $items=Person::orderBy($sort,'asc')->paginate(5);
   $param=['items'=>$items,'sort'=>$sort];
+  return view('hello.index',$param);
+  */
+  //Auth
+  $user=Auth::user();
+  $sort=$request->sort;
+  $items=Person::orderBy($sort,'asc')->simplePaginate(5);
+  $param=['items'=>$items,'sort'=>$sort,'user'=>$user];
   return view('hello.index',$param);
 }
 
@@ -298,6 +309,24 @@ public function index(Request $request){
     $msg=$request->input;
     $request->session()->put('msg',$msg);
     return redirect('hello/session');
+  }
+
+  //auth
+  public function getAuth(Request $request){
+    $param=['message'=>'pleage login'];
+    return view('hello.auth',$param);
+  }
+
+  public function postAuth(Request $request){
+    $email=$request->email;
+    $password=$request->password;
+    if(Auth::attempt(['email'=>$email,'password'=>$password])){
+      $msg='login complete:'.Auth::user()->name;
+    }
+    else{
+      $msg='login error';
+    }
+    return view('hello.auth',['message'=>$msg]);
   }
 
 }
